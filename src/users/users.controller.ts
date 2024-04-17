@@ -14,8 +14,7 @@ export class UsersController {
   @Get('/own')
   findAll(@Req() req) {
     const user=req.user;
-    const id=user.id;
-    console.log(id,"useridown")
+    const id=user._id;
     return this.usersService.findById(id);
   }
 

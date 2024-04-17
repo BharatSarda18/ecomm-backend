@@ -11,29 +11,25 @@ export class CartController {
 
   @Post()
   create(@Body() createCartDto: CreateCartDto,@Req() req) {
-    console.log("iduser====>");
-    const id=req.user.id;
-    
+    const id=req.user._id;
     return this.cartService.create(createCartDto,id);
   }
 
   @Get()
   findAll(@Req() req) {
-    const id=req.user.id;
+    const id=req.user._id;
     return this.cartService.findAll(id);
   }
 
   @Get(`/reset`)
   resetCart(@Req() req) {
-    const id=req.user.id;
-    console.log(req,"request")
+    const id=req.user._id;
     return this.cartService.resetCartService(id);
   }
 
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCartDto: UpdateCartDto) {
-    console.log(id,"idforupdate")
     return this.cartService.update(id, updateCartDto);
   }
 

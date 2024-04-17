@@ -23,21 +23,18 @@ let CartController = class CartController {
         this.cartService = cartService;
     }
     create(createCartDto, req) {
-        console.log("iduser====>");
-        const id = req.user.id;
+        const id = req.user._id;
         return this.cartService.create(createCartDto, id);
     }
     findAll(req) {
-        const id = req.user.id;
+        const id = req.user._id;
         return this.cartService.findAll(id);
     }
     resetCart(req) {
-        const id = req.user.id;
-        console.log(req, "request");
+        const id = req.user._id;
         return this.cartService.resetCartService(id);
     }
     update(id, updateCartDto) {
-        console.log(id, "idforupdate");
         return this.cartService.update(id, updateCartDto);
     }
     remove(id) {

@@ -29,7 +29,6 @@ let OrderController = class OrderController {
     findAll(req, query) {
         const id = req?.user?.id;
         const { _page, _limit, _sort, _order } = query;
-        console.log(query, "user===>");
         const skip = (_page - 1) * _limit;
         return this.orderService.findAll(_page, _limit, _sort, _order);
     }

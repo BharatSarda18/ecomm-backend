@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /// <reference types="mongoose/types/aggregate" />
 /// <reference types="mongoose/types/callback" />
 /// <reference types="mongoose/types/collection" />
@@ -28,7 +29,12 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    findAll(req: any): Promise<import("mongoose").Document<unknown, {}, import("./schema/users.schema").Users> & import("./schema/users.schema").Users & {
+    findAll(req: any): Promise<{
+        email: string;
+        role: string;
+        addresses: import("mongoose").Schema.Types.Mixed;
+        name: string;
+        salt: Buffer;
         _id: import("mongoose").Types.ObjectId;
     }>;
     update(id: string, updateUserDto: UpdateUserDto): import("mongoose").Query<import("mongoose").Document<unknown, {}, import("./schema/users.schema").Users> & import("./schema/users.schema").Users & {

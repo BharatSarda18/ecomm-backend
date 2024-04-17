@@ -17,9 +17,8 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const login_user_dto_1 = require("./dto/login-user.dto");
 const signup_user_dto_1 = require("./dto/signup-user.dto");
-const reset_password_dto_1 = require("./dto/reset-password.dto");
-const reset_password_request_dto_1 = require("./dto/reset-password-request.dto");
 const jwt_auth_guard_1 = require("../guard/jwt-auth/jwt-auth.guard");
+const platform_express_1 = require("@nestjs/platform-express");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
@@ -30,17 +29,11 @@ let AuthController = class AuthController {
     login(LoginUserDto) {
         return this.authService.loginService(LoginUserDto);
     }
-    logout(res) {
-        return this.authService.logoutService(res);
+    uploadFile(file) {
+        this.authService.saveUploadedData(file);
     }
     checkin(req) {
         return this.authService.checkInService(req);
-    }
-    resetPasswordRequest(ResetPassWordRequestDto) {
-        return this.authService.resetPasswordReqService(ResetPassWordRequestDto);
-    }
-    resetPassword(ResetPassWordDto) {
-        return this.authService.resetPasswordService(ResetPassWordDto);
     }
 };
 exports.AuthController = AuthController;
@@ -59,13 +52,13 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "login", null);
 __decorate([
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.Get)('/logout'),
-    __param(0, (0, common_1.Res)()),
+    (0, common_1.Post)('/upload'),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Response]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
-], AuthController.prototype, "logout", null);
+], AuthController.prototype, "uploadFile", null);
 __decorate([
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     (0, common_1.Get)('/checkin'),
@@ -74,20 +67,6 @@ __decorate([
     __metadata("design:paramtypes", [Request]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "checkin", null);
-__decorate([
-    (0, common_1.Post)('/reset-password-request'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [reset_password_request_dto_1.ResetPassWordRequestDto]),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "resetPasswordRequest", null);
-__decorate([
-    (0, common_1.Post)('/reset-password'),
-    __param(0, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [reset_password_dto_1.ResetPassWordDto]),
-    __metadata("design:returntype", void 0)
-], AuthController.prototype, "resetPassword", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

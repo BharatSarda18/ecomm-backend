@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /// <reference types="mongoose/types/aggregate" />
 /// <reference types="mongoose/types/callback" />
 /// <reference types="mongoose/types/collection" />
@@ -29,7 +30,12 @@ declare const JwtStrategy_base: new (...args: any[]) => Strategy;
 export declare class JwtStrategy extends JwtStrategy_base {
     private UsersService;
     constructor(UsersService: UsersService);
-    validate(payload: any): Promise<import("mongoose").Document<unknown, {}, import("../users/schema/users.schema").Users> & import("../users/schema/users.schema").Users & {
+    validate(payload: any): Promise<{
+        email: string;
+        role: string;
+        addresses: import("mongoose").Schema.Types.Mixed;
+        name: string;
+        salt: Buffer;
         _id: import("mongoose").Types.ObjectId;
     }>;
 }

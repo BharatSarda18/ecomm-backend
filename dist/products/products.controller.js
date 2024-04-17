@@ -28,7 +28,6 @@ let ProductsController = class ProductsController {
     findAll(req, query) {
         console.log(query, "query");
         const { _page, _limit, _sort, _order, category, brand } = query;
-        console.log(req.user, "user===>");
         if (_page && _limit) {
             const skip = (_page - 1) * _limit;
             return this.productsService.findAllWithPagination(_page, _limit, _sort, _order, category, brand);

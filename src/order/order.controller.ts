@@ -19,7 +19,7 @@ export class OrderController {
   findAll(@Req() req,@Query() query) {
     const id=req?.user?.id;
     const { _page,_limit , _sort, _order } = query;
-    console.log(query,"user===>");
+    // console.log(query,"user===>");
    // if (_page && _limit) {
       // Calculate skip value based on page and limit
       const skip = (_page - 1) * _limit;

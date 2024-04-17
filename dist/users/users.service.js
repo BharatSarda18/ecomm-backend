@@ -23,8 +23,11 @@ let UsersService = class UsersService {
     }
     async findById(id) {
         const user = await this.userstModel.findById(id);
-        delete user.password;
-        return user;
+        if (!user) {
+            throw new common_1.BadRequestException("User did not match");
+        }
+        const { resetPasswordToken, password, ...userObject } = user.toObject();
+        return userObject;
     }
     async findOne(email) {
         return this.userstModel.findOne({ email });

@@ -1,3 +1,4 @@
+/// <reference types="node" />
 /// <reference types="mongoose/types/aggregate" />
 /// <reference types="mongoose/types/callback" />
 /// <reference types="mongoose/types/collection" />
@@ -29,7 +30,12 @@ import { Users } from './schema/users.schema';
 export declare class UsersService {
     private userstModel;
     constructor(userstModel: Model<Users>);
-    findById(id: string): Promise<import("mongoose").Document<unknown, {}, Users> & Users & {
+    findById(id: string): Promise<{
+        email: string;
+        role: string;
+        addresses: import("mongoose").Schema.Types.Mixed;
+        name: string;
+        salt: Buffer;
         _id: import("mongoose").Types.ObjectId;
     }>;
     findOne(email: string): Promise<import("mongoose").Document<unknown, {}, Users> & Users & {

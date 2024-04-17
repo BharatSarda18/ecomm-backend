@@ -23,8 +23,7 @@ let UsersController = class UsersController {
     }
     findAll(req) {
         const user = req.user;
-        const id = user.id;
-        console.log(id, "useridown");
+        const id = user._id;
         return this.usersService.findById(id);
     }
     update(id, updateUserDto) {
