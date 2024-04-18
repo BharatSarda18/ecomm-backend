@@ -14,9 +14,19 @@ import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ResponseInterceptor } from './interceptor/response/response.interceptor';
 import { JwtAuthGuard } from './guard/jwt-auth/jwt-auth.guard';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { ConfigModule } from '@nestjs/config';
 
+//console.log(process.env.MONGO_URI,"process.env.NODE_ENV",process.env.NODE_ENV);
+
+const envFilePath = `${process.cwd()}/env/.env.${process.env.NODE_ENV}`;
+console.log(process.env.JWT_SECRET,"JWT_SECRET",process.env.MONGO_URI);
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      // envFilePath:`${process.env.NODE_ENV}.env`
+      envFilePath
+    }),
     // MailerModule.forRoot({
     //   transport:{
     //     host:'smtp.gmail.com',
@@ -26,7 +36,7 @@ import { MailerModule } from '@nestjs-modules/mailer';
     //     }
     //   }
     // }),
-    MongooseModule.forRoot(`mongodb+srv://sardabharat71:S%40rda1809@ecommerce.7akgctz.mongodb.net/`),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     AuthModule,
     BrandModule,
     CategoriesModule,

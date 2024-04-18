@@ -20,13 +20,20 @@ const mongoose_1 = require("@nestjs/mongoose");
 const cart_module_1 = require("./cart/cart.module");
 const core_1 = require("@nestjs/core");
 const response_interceptor_1 = require("./interceptor/response/response.interceptor");
+const config_1 = require("@nestjs/config");
+const envFilePath = `${process.cwd()}/env/.env.${process.env.NODE_ENV}`;
+console.log(process.env.JWT_SECRET, "JWT_SECRET", process.env.MONGO_URI);
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            mongoose_1.MongooseModule.forRoot(`mongodb+srv://sardabharat71:S%40rda1809@ecommerce.7akgctz.mongodb.net/`),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                envFilePath
+            }),
+            mongoose_1.MongooseModule.forRoot(process.env.MONGO_URI),
             auth_module_1.AuthModule,
             brand_module_1.BrandModule,
             categories_module_1.CategoriesModule,

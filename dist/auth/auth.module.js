@@ -15,6 +15,7 @@ const jwt_1 = require("@nestjs/jwt");
 const auth_data_1 = require("./auth.data");
 const passport_1 = require("@nestjs/passport");
 const jwt_strategy_1 = require("./jwt.strategy");
+console.log(process.env.JWT_SECRET_KEY, "process.env.JWT_SECRET", process.env.JWT_EXPIREY);
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
@@ -24,7 +25,7 @@ exports.AuthModule = AuthModule = __decorate([
             passport_1.PassportModule.register({ defaultStrategy: "jwt" }),
             jwt_1.JwtModule.register({
                 secret: auth_data_1.jwtConstants.secret,
-                signOptions: { expiresIn: "6000min" }
+                signOptions: { expiresIn: '60min' }
             })
         ],
         controllers: [auth_controller_1.AuthController],

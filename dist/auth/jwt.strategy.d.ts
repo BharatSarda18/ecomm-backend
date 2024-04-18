@@ -26,10 +26,12 @@
 /// <reference types="mongoose/types/inferschematype" />
 import { UsersService } from './../users/users.service';
 import { Strategy } from 'passport-jwt';
+import { ConfigService } from '@nestjs/config';
 declare const JwtStrategy_base: new (...args: any[]) => Strategy;
 export declare class JwtStrategy extends JwtStrategy_base {
     private UsersService;
-    constructor(UsersService: UsersService);
+    private configService;
+    constructor(UsersService: UsersService, configService: ConfigService);
     validate(payload: any): Promise<{
         email: string;
         role: string;

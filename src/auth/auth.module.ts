@@ -7,13 +7,19 @@ import { jwtConstants } from './auth.data';
 import { PassportModule } from '@nestjs/passport';
 
 import { JwtStrategy } from './jwt.strategy';
+import { ConfigService } from '@nestjs/config';
+
+console.log(process.env.JWT_SECRET_KEY, "process.env.JWT_SECRET",process.env.JWT_EXPIREY);
+
 
 @Module({
   imports: [UsersModule,
     PassportModule.register({defaultStrategy:"jwt"}),
     JwtModule.register({
-      secret: jwtConstants.secret,
-      signOptions: { expiresIn: "6000min" }
+       secret: jwtConstants.secret,
+     // secret:ConfigService.
+     // secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '60min' }
     })
   ],
   controllers: [AuthController],
