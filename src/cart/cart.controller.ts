@@ -18,6 +18,7 @@ export class CartController {
   @Get()
   findAll(@Req() req) {
     const id=req.user._id;
+    console.log(id,"cartuserid");
     return this.cartService.findAll(id);
   }
 

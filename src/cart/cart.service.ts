@@ -40,6 +40,7 @@ export class CartService {
   }
 
   async remove(id: string) {
-    return await this.cartModel.findByIdAndDelete(id).exec();
+   const data= await this.cartModel.findByIdAndDelete(id).exec();
+    return {"dat":"asdfd"}
   }
 }

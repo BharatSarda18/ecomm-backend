@@ -11,7 +11,9 @@ export class OrderController {
 
   @Post()
   create(@Body() createOrderDto: CreateOrderDto,@Req() req ) {
-    const user=req.user;
+    console.log('createuserdto');
+    const user=req?.user?._id;
+   
     return this.orderService.create(createOrderDto,user);
   }
 
@@ -33,7 +35,8 @@ export class OrderController {
 
   @Get(`/own/`)
   fetchOrdersByUser(@Req() req){
-    const id=req?.user?.id;
+    const id=req?.user?._id;
+    // console.log("orderid",req);
     return this.orderService.fetchOrdersByUserId(id);
   }
 

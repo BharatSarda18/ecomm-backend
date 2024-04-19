@@ -11,12 +11,13 @@ import { UsersService } from 'src/users/users.service';
 @Injectable()
 export class OrderService {
 
-  constructor(@InjectModel(Orders.name) private orderModel: Model<Orders>, private readonly productService: ProductsService,private readonly userService: UsersService) { }
+  constructor(@InjectModel(Orders.name) private orderModel: Model<Orders>, private readonly productService: ProductsService, private readonly userService: UsersService) { }
 
-  async create(createOrderDto: CreateOrderDto,userid:string) {
-     const order=await new this.orderModel(createOrderDto);
-    for(let item of order.items){
-      console.log(item,"itemitem");
+  async create(createOrderDto: CreateOrderDto, userid: string) {
+    const order = await new this.orderModel({...createOrderDto,user:userid});
+    console.log("userid")
+    for (let item of order.items) {
+     // console.log(item, "itemitem");
       await this.productService.updateStock(item.product, item.quantity);
 
       const doc = await order.save();
@@ -30,11 +31,11 @@ export class OrderService {
       //   html: invoiceTemplate(order), // Assuming you have invoiceTemplate function
       //   subject: 'Order Received',
       // });
-  
-     }
 
-     return order;
-      
+    }
+
+    return order;
+
   }
 
   async findAll(_sort: string, _order: string, _page: number, _limit: number) {
@@ -58,11 +59,11 @@ export class OrderService {
       const pageSize = _limit;
       const page = _page;
       query = query.skip(pageSize * (page - 1)).limit(pageSize);
-     
+
       //return this.orderModel.find({user:id});
     }
-    const orders=await query.exec();
-    return {orders,totalOrders};
+    const orders = await query.exec();
+    return { orders, totalOrders };
   }
   findOwn() {
     return '';

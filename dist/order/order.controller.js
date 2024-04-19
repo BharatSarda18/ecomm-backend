@@ -23,7 +23,8 @@ let OrderController = class OrderController {
         this.orderService = orderService;
     }
     create(createOrderDto, req) {
-        const user = req.user;
+        const user = req?.user?._id;
+        console.log(user, "userid");
         return this.orderService.create(createOrderDto, user);
     }
     findAll(req, query) {
@@ -33,7 +34,7 @@ let OrderController = class OrderController {
         return this.orderService.findAll(_page, _limit, _sort, _order);
     }
     fetchOrdersByUser(req) {
-        const id = req?.user?.id;
+        const id = req?.user?._id;
         return this.orderService.fetchOrdersByUserId(id);
     }
     update(id, updateOrderDto) {

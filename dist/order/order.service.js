@@ -26,9 +26,8 @@ let OrderService = class OrderService {
         this.userService = userService;
     }
     async create(createOrderDto, userid) {
-        const order = await new this.orderModel(createOrderDto);
+        const order = await new this.orderModel({ ...createOrderDto, user: userid });
         for (let item of order.items) {
-            console.log(item, "itemitem");
             await this.productService.updateStock(item.product, item.quantity);
             const doc = await order.save();
             const user = await this.userService.findById(userid);
