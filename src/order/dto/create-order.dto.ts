@@ -1,5 +1,5 @@
 export class CreateOrderDto {
-    items: string[];
+    items: any[];
 
     totalAmount: number;
 
