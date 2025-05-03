@@ -1,5 +1,5 @@
 export declare class CreateOrderDto {
-    items: string[];
+    items: any[];
     totalAmount: number;
     totalItems: number;
     user: string;

@@ -36,7 +36,7 @@ export declare class OrderService {
     create(createOrderDto: CreateOrderDto, userid: string): Promise<import("mongoose").Document<unknown, {}, Orders> & Orders & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    findAll(_sort: string, _order: string, _page: number, _limit: number): Promise<{
+    findAll(_page: number, _limit: number, _sort: string, _order: string): Promise<{
         orders: (import("mongoose").Document<unknown, {}, Orders> & Orders & {
             _id: import("mongoose").Types.ObjectId;
         })[];

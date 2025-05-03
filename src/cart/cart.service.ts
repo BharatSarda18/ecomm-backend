@@ -21,9 +21,10 @@ export class CartService {
   // }
 
   async resetCartService(id: string) {
-    console.log(id,'idfordelete');
     const cart=await this.cartModel.findOne({user:id});
-    const deletedcart=await this.cartModel.findByIdAndDelete(cart._id);
+    if(cart){
+      await this.cartModel.findByIdAndDelete(cart._id);
+    }
     return cart;
 }
   findAll(id:number) {

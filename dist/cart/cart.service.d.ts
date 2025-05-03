@@ -43,7 +43,7 @@ export declare class CartService {
     update(id: string, updateCartDto: UpdateCartDto): Promise<import("mongoose").Document<unknown, {}, Cart> & Cart & {
         _id: import("mongoose").Types.ObjectId;
     }>;
-    remove(id: string): Promise<import("mongoose").Document<unknown, {}, Cart> & Cart & {
-        _id: import("mongoose").Types.ObjectId;
+    remove(id: string): Promise<{
+        dat: string;
     }>;
 }

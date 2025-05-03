@@ -38,7 +38,9 @@ export class OrderService {
 
   }
 
-  async findAll(_sort: string, _order: string, _page: number, _limit: number) {
+  async findAll(_page: number, _limit: number,_sort: string, _order: string) {
+
+    console.log(_page,_limit,"jhbuh")
     let query = this.orderModel.find({ deleted: { $ne: true } });
     let totalOrdersQuery = this.orderModel.find({ deleted: { $ne: true } });
 
@@ -55,6 +57,7 @@ export class OrderService {
     //   const totalDocs = await totalOrdersQuery.count().exec();
     // console.log({ totalDocs });
     const totalOrders = await this.orderModel.countDocuments(query);
+    
     if (_page && _limit) {
       const pageSize = _limit;
       const page = _page;
